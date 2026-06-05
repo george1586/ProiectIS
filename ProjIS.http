@@ -1,0 +1,6 @@
+@ProjIS_HostAddress = http://localhost:5249
+
+GET {{ProjIS_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
