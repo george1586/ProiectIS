@@ -32,3 +32,6 @@
 /home/potens/ProjIS/obj/Debug/net10.0/ProjIS.pdb
 /home/potens/ProjIS/obj/Debug/net10.0/ProjIS.genruntimeconfig.cache
 /home/potens/ProjIS/obj/Debug/net10.0/ref/ProjIS.dll
+/home/potens/ProjIS/bin/Debug/net10.0/Swashbuckle.AspNetCore.Swagger.dll
+/home/potens/ProjIS/bin/Debug/net10.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/home/potens/ProjIS/bin/Debug/net10.0/Swashbuckle.AspNetCore.SwaggerUI.dll
