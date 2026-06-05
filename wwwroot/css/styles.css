@@ -1,0 +1,443 @@
+/* ============================================
+   ProjIS — Airline Reservation System
+   Design Tokens
+   Colors: Deep Navy + Amber Gold
+   ============================================ */
+
+:root {
+
+  /* ── Core Brand Colors ── */
+  --color-primary: #0A1628;
+  /* Deep Navy — headers, nav, sidebar */
+  --color-primary-light: #132240;
+  /* Lighter navy — hover states, cards */
+  --color-primary-dark: #060D18;
+  /* Darker navy — shadows, depth */
+
+  --color-accent: #F5A623;
+  /* Amber Gold — buttons, highlights, CTAs */
+  --color-accent-light: #F8BC55;
+  /* Light amber — hover on accent */
+  --color-accent-dark: #D4891A;
+  /* Dark amber — pressed state */
+
+  /* ── Neutrals ── */
+  --color-white: #FFFFFF;
+  --color-background: #F4F6FA;
+  /* Page background */
+  --color-surface: #FFFFFF;
+  /* Card / panel background */
+  --color-border: #DDE2ED;
+  /* Borders, dividers */
+  --color-border-dark: #B0BAD0;
+  /* Stronger borders */
+
+  /* ── Text ── */
+  --color-text-primary: #0A1628;
+  /* Main text — same as navy */
+  --color-text-secondary: #4A5568;
+  /* Subtext, labels */
+  --color-text-muted: #8A96A8;
+  /* Placeholders, disabled */
+  --color-text-inverse: #FFFFFF;
+  /* Text on dark backgrounds */
+  --color-text-accent: #F5A623;
+  /* Highlighted / amber text */
+
+  /* ── Semantic Colors ── */
+  --color-success: #22C55E;
+  /* Booking confirmed, payment ok */
+  --color-success-bg: #DCFCE7;
+  --color-warning: #F59E0B;
+  /* Last minute discount badge */
+  --color-warning-bg: #FEF3C7;
+  --color-error: #EF4444;
+  /* No flights found, errors */
+  --color-error-bg: #FEE2E2;
+  --color-info: #3B82F6;
+  /* Flight info, notices */
+  --color-info-bg: #DBEAFE;
+
+  /* ── Typography ── */
+  --font-display: 'Playfair Display', Georgia, serif;
+  /* Headings */
+  --font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
+  /* Body text */
+  --font-mono: 'JetBrains Mono', monospace;
+  /* Codes, flight numbers */
+
+  --text-xs: 0.75rem;
+  /* 12px */
+  --text-sm: 0.875rem;
+  /* 14px */
+  --text-base: 1rem;
+  /* 16px */
+  --text-lg: 1.125rem;
+  /* 18px */
+  --text-xl: 1.25rem;
+  /* 20px */
+  --text-2xl: 1.5rem;
+  /* 24px */
+  --text-3xl: 1.875rem;
+  /* 30px */
+  --text-4xl: 2.25rem;
+  /* 36px */
+
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-loose: 1.75;
+
+  /* ── Spacing ── */
+  --space-1: 0.25rem;
+  /*  4px */
+  --space-2: 0.5rem;
+  /*  8px */
+  --space-3: 0.75rem;
+  /* 12px */
+  --space-4: 1rem;
+  /* 16px */
+  --space-5: 1.25rem;
+  /* 20px */
+  --space-6: 1.5rem;
+  /* 24px */
+  --space-8: 2rem;
+  /* 32px */
+  --space-10: 2.5rem;
+  /* 40px */
+  --space-12: 3rem;
+  /* 48px */
+  --space-16: 4rem;
+  /* 64px */
+  --space-20: 5rem;
+  /* 80px */
+
+  /* ── Border Radius ── */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+  /* Pills, badges */
+
+  /* ── Shadows ── */
+  --shadow-sm: 0 1px 3px rgba(10, 22, 40, 0.08);
+  --shadow-md: 0 4px 12px rgba(10, 22, 40, 0.12);
+  --shadow-lg: 0 8px 24px rgba(10, 22, 40, 0.16);
+  --shadow-xl: 0 16px 48px rgba(10, 22, 40, 0.20);
+
+  /* ── Transitions ── */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 400ms ease;
+
+  /* ── Layout ── */
+  --container-max: 1200px;
+  --nav-height: 64px;
+  --sidebar-width: 260px;
+
+  /* ── Z-index ── */
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+}
+
+
+/* ============================================
+   Base Reset
+   ============================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-background);
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-weight: var(--font-bold);
+  line-height: var(--leading-tight);
+  color: var(--color-primary);
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-accent-dark);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
+/* Containers */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: var(--color-accent);
+  color: var(--color-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-accent-light);
+  color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary:active {
+  background-color: var(--color-accent-dark);
+}
+
+.btn-secondary {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-text-inverse);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.btn-outline:hover {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+
+/* Cards */
+.card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+}
+
+.badge-success {
+  background: var(--color-success-bg);
+  color: var(--color-success);
+}
+
+.badge-warning {
+  background: var(--color-warning-bg);
+  color: var(--color-warning);
+}
+
+.badge-error {
+  background: var(--color-error-bg);
+  color: var(--color-error);
+}
+
+.badge-info {
+  background: var(--color-info-bg);
+  color: var(--color-info);
+}
+
+/* Discount badges — used for last minute / round trip */
+.badge-lastminute {
+  background: var(--color-error-bg);
+  color: var(--color-error);
+}
+
+.badge-roundtrip {
+  background: var(--color-info-bg);
+  color: var(--color-info);
+}
+
+/* Form inputs */
+.input {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-surface);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.2);
+}
+
+.input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* Flight class tags */
+.class-economy {
+  color: var(--color-info);
+  font-weight: var(--font-semibold);
+}
+
+.class-business {
+  color: var(--color-accent);
+  font-weight: var(--font-semibold);
+}
+
+.class-first {
+  color: var(--color-primary);
+  font-weight: var(--font-semibold);
+}
+
+
+/* ============================================
+   Navbar
+   ============================================ */
+
+.navbar {
+  background-color: var(--color-primary-dark);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--nav-height);
+}
+
+.navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  color: var(--color-white);
+  font-weight: var(--font-bold);
+  text-decoration: none;
+}
+
+.navbar__brand:hover {
+  color: var(--color-white);
+}
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.navbar__link {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.navbar__link:hover {
+  color: var(--color-white);
+}
+
+.btn--sm {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+}
+
+
+/* ============================================
+   Footer
+   ============================================ */
+
+.footer {
+  background: var(--color-primary-dark);
+  padding: var(--space-6) 0;
+}
+
+.footer__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer__brand {
+  font-family: var(--font-display);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: var(--text-sm);
+}
+
+.footer__tagline {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: var(--text-sm);
+}

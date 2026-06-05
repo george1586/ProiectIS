@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SkyGate</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="~/css/styles.css" />
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="container navbar__inner">
+
+            <a href="/" class="navbar__brand">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 20L14 4L24 20H16L14 24L12 20H4Z" fill="#F5A623" />
+                </svg>
+                <span>SkyGate</span>
+            </a>
+
+            <div class="navbar__links">
+                <a href="/" class="navbar__link">Search Flights</a>
+                <a href="/auth/airline" class="navbar__link">Airline Login</a>
+                <a href="/auth/staff" class="btn btn-primary btn--sm">Airport Staff</a>
+            </div>
+
+        </div>
+    </nav>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__inner">
+            <span class="footer__brand">SkyGate &copy; @DateTime.Now.Year</span>
+            <span class="footer__tagline">Your journey starts here.</span>
+        </div>
+    </footer>
+
+</body>
+
+</html>

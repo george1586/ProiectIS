@@ -35,3 +35,7 @@
 /home/potens/ProjIS/bin/Debug/net10.0/Swashbuckle.AspNetCore.Swagger.dll
 /home/potens/ProjIS/bin/Debug/net10.0/Swashbuckle.AspNetCore.SwaggerGen.dll
 /home/potens/ProjIS/bin/Debug/net10.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/home/potens/ProjIS/obj/Debug/net10.0/ProjIS.RazorAssemblyInfo.cache
+/home/potens/ProjIS/obj/Debug/net10.0/ProjIS.RazorAssemblyInfo.cs
+/home/potens/ProjIS/bin/Debug/net10.0/ProjIS.staticwebassets.runtime.json
+/home/potens/ProjIS/obj/Debug/net10.0/compressed/3j3ug1oy74-{0}-xiwvnz7mlw-xiwvnz7mlw.gz
