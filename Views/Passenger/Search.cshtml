@@ -1,0 +1,33 @@
+@model ProjIS.Models.ViewModels.FlightSearchViewModel
+
+@{
+    ViewData["Title"] = "Search Flights";
+}
+
+<h1>Where do you want to fly today?</h1>
+
+<form asp-controller="Passenger" asp-action="Results" method="get">
+    <div asp-validation-summary="All"></div>
+
+    <label>From</label>
+    <input asp-for="DepartureCity" placeholder="City or airport" />
+
+    <label>To</label>
+    <input asp-for="DestinationCity" placeholder="City or airport" />
+
+    <label>Departure date</label>
+    <input asp-for="DepartureDate" type="date" />
+
+    <label>Passengers</label>
+    <input asp-for="Passengers" type="number" min="1" />
+
+    <label>
+        <input asp-for="IsRoundTrip" />
+        Round trip
+    </label>
+
+    <label>Return date</label>
+    <input asp-for="ReturnDate" type="date" />
+
+    <button type="submit">Search flights</button>
+</form>

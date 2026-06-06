@@ -1,0 +1,262 @@
+@using ProjIS.Models
+@model Reservation
+
+@{
+    ViewData["Title"] = "Reservation Confirmation";
+}
+
+<section style="padding: var(--space-12) 0;">
+    <div class="container">
+
+        <div class="card" style="
+            max-width: 900px;
+            margin: 0 auto;
+            padding: var(--space-10);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+        ">
+
+            <div style="
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap: var(--space-6);
+                margin-bottom: var(--space-8);
+            ">
+                <div>
+                    <span class="badge badge-success">
+                        Reservation confirmed
+                    </span>
+
+                    <h1 style="margin-top: var(--space-4); margin-bottom: var(--space-3);">
+                        Your booking is ready
+                    </h1>
+
+                    <p style="color: var(--color-text-secondary);">
+                        Reservation number:
+                        <strong>#@Model.Id</strong>
+                    </p>
+                </div>
+
+                <div style="text-align: right;">
+                    @if (Model.PaymentStatus == PaymentStatus.Paid)
+                    {
+                        <span class="badge badge-success">
+                            Paid
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-warning">
+                            Pending cash payment
+                        </span>
+                    }
+
+                    <p style="
+                        margin-top: var(--space-3);
+                        font-size: var(--text-3xl);
+                        font-weight: var(--font-bold);
+                        color: var(--color-accent);
+                    ">
+                        @Model.TotalPrice lei
+                    </p>
+                </div>
+            </div>
+
+            <div style="
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-6);
+                margin-bottom: var(--space-8);
+            ">
+                <div class="card" style="box-shadow: none;">
+                    <h2 style="margin-bottom: var(--space-4);">
+                        Passenger
+                    </h2>
+
+                    <p>
+                        <strong>Name:</strong>
+                        @Model.PassengerName
+                    </p>
+
+                    <p>
+                        <strong>Phone:</strong>
+                        @Model.Phone
+                    </p>
+
+                    <p>
+                        <strong>Adults:</strong>
+                        @Model.AdultsCount
+                    </p>
+
+                    <p>
+                        <strong>Children:</strong>
+                        @Model.ChildrenCount
+                    </p>
+
+                    <p>
+                        <strong>Seniors:</strong>
+                        @Model.SeniorsCount
+                    </p>
+                </div>
+
+                <div class="card" style="box-shadow: none;">
+                    <h2 style="margin-bottom: var(--space-4);">
+                        Payment
+                    </h2>
+
+                    <p>
+                        <strong>Method:</strong>
+                        @Model.PaymentMethod
+                    </p>
+
+                    <p>
+                        <strong>Status:</strong>
+                        @Model.PaymentStatus
+                    </p>
+
+                    @if (Model.PaymentMethod == PaymentMethod.Cash)
+                    {
+                        <div style="
+                            margin-top: var(--space-4);
+                            padding: var(--space-4);
+                            background: var(--color-warning-bg);
+                            color: var(--color-warning);
+                            border-radius: var(--radius-md);
+                        ">
+                            Your cash payment must be validated by airport staff.
+                        </div>
+                    }
+                    else
+                    {
+                        <div style="
+                            margin-top: var(--space-4);
+                            padding: var(--space-4);
+                            background: var(--color-success-bg);
+                            color: var(--color-success);
+                            border-radius: var(--radius-md);
+                        ">
+                            Your card payment was confirmed automatically.
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="card" style="
+                box-shadow: none;
+                margin-bottom: var(--space-8);
+            ">
+                <span class="badge badge-info">
+                    Outbound flight
+                </span>
+
+                <h2 style="margin-top: var(--space-3); margin-bottom: var(--space-4);">
+                    @Model.OutboundFlight?.DepartureCity - @Model.OutboundFlight?.DestinationCity
+                </h2>
+
+                <div style="
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: var(--space-4);
+                ">
+                    <p>
+                        <strong>Date:</strong><br />
+                        @Model.OutboundDate
+                    </p>
+
+                    <p>
+                        <strong>Class:</strong><br />
+                        @Model.OutboundClass
+                    </p>
+
+                    <p>
+                        <strong>Route:</strong><br />
+                        @(Model.OutboundFlight?.RouteCode ?? "-")
+                    </p>
+                </div>
+            </div>
+
+            @if (Model.ReturnFlight != null)
+            {
+                <div class="card" style="
+                    box-shadow: none;
+                    margin-bottom: var(--space-8);
+                ">
+                    <span class="badge badge-roundtrip">
+                        Return flight
+                    </span>
+
+                    <h2 style="margin-top: var(--space-3); margin-bottom: var(--space-4);">
+                        @Model.ReturnFlight.DepartureCity - @Model.ReturnFlight.DestinationCity
+                    </h2>
+
+                    <div style="
+                        display: grid;
+                        grid-template-columns: repeat(3, 1fr);
+                        gap: var(--space-4);
+                    ">
+                        <p>
+                            <strong>Date:</strong><br />
+                            @Model.ReturnDate
+                        </p>
+
+                        <p>
+                            <strong>Class:</strong><br />
+                            @Model.ReturnClass
+                        </p>
+
+                        <p>
+                            <strong>Route:</strong><br />
+                            @Model.ReturnFlight.RouteCode
+                        </p>
+                    </div>
+                </div>
+            }
+
+            <div class="card" style="
+                box-shadow: none;
+                margin-bottom: var(--space-8);
+            ">
+                <h2 style="margin-bottom: var(--space-4);">
+                    Extras
+                </h2>
+
+                <div style="
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: var(--space-4);
+                ">
+                    <p>
+                        <strong>Meal included:</strong>
+                        @(Model.HasMeal ? "Yes" : "No")
+                    </p>
+
+                    <p>
+                        <strong>Extra luggage:</strong>
+                        @(Model.HasExtraLuggage ? "Yes" : "No")
+                    </p>
+                </div>
+            </div>
+
+            <div style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: var(--space-4);
+                padding-top: var(--space-6);
+                border-top: 1px solid var(--color-border);
+            ">
+                <a class="btn btn-outline" asp-controller="Home" asp-action="Index">
+                    Back to search
+                </a>
+
+                @if (Model.PaymentMethod == PaymentMethod.Cash)
+                {
+                    <a class="btn btn-primary" href="/AirportStaff">
+                        Go to airport staff
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</section>

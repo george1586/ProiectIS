@@ -1,0 +1,334 @@
+@using ProjIS.Models
+@model ProjIS.Models.ViewModels.BookingViewModel
+
+@{
+    ViewData["Title"] = "Book Flight";
+}
+
+<section style="padding: var(--space-12) 0;">
+    <div class="container">
+
+        <h1 style="margin-bottom: var(--space-8);">
+            Book flight
+        </h1>
+
+        <div style="
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: var(--space-8);
+            align-items: start;
+        ">
+
+            <div class="card">
+                <h2 style="margin-bottom: var(--space-5);">
+                    Flight summary
+                </h2>
+
+                @if (Model.OutboundFlight != null)
+                {
+                    <div style="margin-bottom: var(--space-6);">
+                        <span class="badge badge-info">Outbound</span>
+
+                        <h3 style="margin-top: var(--space-3); margin-bottom: var(--space-3);">
+                            @Model.OutboundFlight.DepartureCity - @Model.OutboundFlight.DestinationCity
+                        </h3>
+
+                        <p>
+                            <strong>Date:</strong>
+                            @Model.OutboundDate
+                        </p>
+
+                        <p>
+                            <strong>Time:</strong>
+                            @Model.OutboundFlight.DepartureTime
+                        </p>
+
+                        <p>
+                            <strong>Plane:</strong>
+                            @Model.OutboundFlight.PlaneModel
+                        </p>
+
+                        <p>
+                            <strong>Route:</strong>
+                            @Model.OutboundFlight.RouteCode
+                        </p>
+                    </div>
+                }
+
+                @if (Model.ReturnFlight != null)
+                {
+                    <div style="margin-top: var(--space-6);">
+                        <span class="badge badge-roundtrip">Return</span>
+
+                        <h3 style="margin-top: var(--space-3); margin-bottom: var(--space-3);">
+                            @Model.ReturnFlight.DepartureCity - @Model.ReturnFlight.DestinationCity
+                        </h3>
+
+                        <p>
+                            <strong>Date:</strong>
+                            @Model.ReturnDate
+                        </p>
+
+                        <p>
+                            <strong>Time:</strong>
+                            @Model.ReturnFlight.DepartureTime
+                        </p>
+
+                        <p>
+                            <strong>Plane:</strong>
+                            @Model.ReturnFlight.PlaneModel
+                        </p>
+
+                        <p>
+                            <strong>Route:</strong>
+                            @Model.ReturnFlight.RouteCode
+                        </p>
+                    </div>
+                }
+
+                <div style="
+                    margin-top: var(--space-6);
+                    padding-top: var(--space-6);
+                    border-top: 1px solid var(--color-border);
+                ">
+                    <p style="color: var(--color-text-secondary); margin-bottom: var(--space-2);">
+                        Estimated price
+                    </p>
+
+                    <p style="
+                        font-size: var(--text-3xl);
+                        font-weight: var(--font-bold);
+                        color: var(--color-accent);
+                    ">
+                        @Model.EstimatedPrice lei
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 style="margin-bottom: var(--space-6);">
+                    Passenger details
+                </h2>
+
+                <form asp-controller="Passenger" asp-action="Book" method="post">
+                    @Html.AntiForgeryToken()
+
+                    <div asp-validation-summary="All" style="
+                        color: var(--color-error);
+                        margin-bottom: var(--space-4);
+                    "></div>
+
+                    <input type="hidden" asp-for="OutboundFlightId" />
+                    <input type="hidden" asp-for="ReturnFlightId" />
+                    <input type="hidden" asp-for="OutboundDate" />
+                    <input type="hidden" asp-for="ReturnDate" />
+
+                    <div style="
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: var(--space-4);
+                        margin-bottom: var(--space-5);
+                    ">
+                        <div>
+                            <label style="
+                                display: block;
+                                font-size: var(--text-xs);
+                                font-weight: var(--font-bold);
+                                color: var(--color-text-secondary);
+                                letter-spacing: 1px;
+                                margin-bottom: var(--space-2);
+                            ">
+                                PASSENGER NAME
+                            </label>
+
+                            <input class="input" asp-for="PassengerName" placeholder="Full name" />
+                        </div>
+
+                        <div>
+                            <label style="
+                                display: block;
+                                font-size: var(--text-xs);
+                                font-weight: var(--font-bold);
+                                color: var(--color-text-secondary);
+                                letter-spacing: 1px;
+                                margin-bottom: var(--space-2);
+                            ">
+                                PHONE
+                            </label>
+
+                            <input class="input" asp-for="Phone" placeholder="Phone number" />
+                        </div>
+                    </div>
+
+                    <h3 style="margin-bottom: var(--space-4);">
+                        Passengers
+                    </h3>
+
+                    <div style="
+                        display: grid;
+                        grid-template-columns: repeat(3, 1fr);
+                        gap: var(--space-4);
+                        margin-bottom: var(--space-6);
+                    ">
+                        <div>
+                            <label style="
+                                display: block;
+                                font-size: var(--text-xs);
+                                font-weight: var(--font-bold);
+                                color: var(--color-text-secondary);
+                                letter-spacing: 1px;
+                                margin-bottom: var(--space-2);
+                            ">
+                                ADULTS
+                            </label>
+
+                            <input class="input" asp-for="AdultsCount" type="number" min="0" />
+                        </div>
+
+                        <div>
+                            <label style="
+                                display: block;
+                                font-size: var(--text-xs);
+                                font-weight: var(--font-bold);
+                                color: var(--color-text-secondary);
+                                letter-spacing: 1px;
+                                margin-bottom: var(--space-2);
+                            ">
+                                CHILDREN
+                            </label>
+
+                            <input class="input" asp-for="ChildrenCount" type="number" min="0" />
+                        </div>
+
+                        <div>
+                            <label style="
+                                display: block;
+                                font-size: var(--text-xs);
+                                font-weight: var(--font-bold);
+                                color: var(--color-text-secondary);
+                                letter-spacing: 1px;
+                                margin-bottom: var(--space-2);
+                            ">
+                                SENIORS
+                            </label>
+
+                            <input class="input" asp-for="SeniorsCount" type="number" min="0" />
+                        </div>
+                    </div>
+
+                    <h3 style="margin-bottom: var(--space-4);">
+                        Options
+                    </h3>
+
+                    <div style="
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: var(--space-4);
+                        margin-bottom: var(--space-6);
+                    ">
+                        <div>
+                            <label style="
+                                display: block;
+                                font-size: var(--text-xs);
+                                font-weight: var(--font-bold);
+                                color: var(--color-text-secondary);
+                                letter-spacing: 1px;
+                                margin-bottom: var(--space-2);
+                            ">
+                                OUTBOUND CLASS
+                            </label>
+
+                            <select class="input" asp-for="OutboundClass" asp-items="Html.GetEnumSelectList<FlightClass>()"></select>
+                        </div>
+
+                        @if (Model.ReturnFlightId != null)
+                        {
+                            <div>
+                                <label style="
+                                    display: block;
+                                    font-size: var(--text-xs);
+                                    font-weight: var(--font-bold);
+                                    color: var(--color-text-secondary);
+                                    letter-spacing: 1px;
+                                    margin-bottom: var(--space-2);
+                                ">
+                                    RETURN CLASS
+                                </label>
+
+                                <select class="input" asp-for="ReturnClass" asp-items="Html.GetEnumSelectList<FlightClass>()"></select>
+                            </div>
+                        }
+
+                        <div>
+                            <label style="
+                                display: block;
+                                font-size: var(--text-xs);
+                                font-weight: var(--font-bold);
+                                color: var(--color-text-secondary);
+                                letter-spacing: 1px;
+                                margin-bottom: var(--space-2);
+                            ">
+                                PAYMENT METHOD
+                            </label>
+
+                            <select class="input" asp-for="PaymentMethod" asp-items="Html.GetEnumSelectList<PaymentMethod>()"></select>
+                        </div>
+                    </div>
+
+                    <div style="
+                        display: flex;
+                        gap: var(--space-4);
+                        margin-bottom: var(--space-8);
+                    ">
+                        <label class="card" style="
+                            display: flex;
+                            align-items: center;
+                            gap: var(--space-3);
+                            padding: var(--space-4);
+                            cursor: pointer;
+                            flex: 1;
+                        ">
+                            <input asp-for="HasMeal" />
+                            <span>
+                                <strong>Meal included</strong><br />
+                                <small style="color: var(--color-text-secondary);">+30 lei / passenger</small>
+                            </span>
+                        </label>
+
+                        <label class="card" style="
+                            display: flex;
+                            align-items: center;
+                            gap: var(--space-3);
+                            padding: var(--space-4);
+                            cursor: pointer;
+                            flex: 1;
+                        ">
+                            <input asp-for="HasExtraLuggage" />
+                            <span>
+                                <strong>Extra luggage</strong><br />
+                                <small style="color: var(--color-text-secondary);">+80 lei / passenger</small>
+                            </span>
+                        </label>
+                    </div>
+
+                    <div style="
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        gap: var(--space-4);
+                        padding-top: var(--space-6);
+                        border-top: 1px solid var(--color-border);
+                    ">
+                        <a class="btn btn-outline" asp-controller="Home" asp-action="Index">
+                            Back
+                        </a>
+
+                        <button type="submit" class="btn btn-primary">
+                            Confirm reservation
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

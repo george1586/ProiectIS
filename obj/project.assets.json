@@ -3249,19 +3249,19 @@
     ]
   },
   "packageFolders": {
-    "/home/potens/.nuget/packages/": {}
+    "C:\\Users\\sindr\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/potens/ProjIS/ProjIS.csproj",
+      "projectUniqueName": "C:\\Users\\sindr\\OneDrive\\Desktop\\ProiectIS\\ProiectIS\\ProjIS.csproj",
       "projectName": "ProjIS",
-      "projectPath": "/home/potens/ProjIS/ProjIS.csproj",
-      "packagesPath": "/home/potens/.nuget/packages/",
-      "outputPath": "/home/potens/ProjIS/obj/",
+      "projectPath": "C:\\Users\\sindr\\OneDrive\\Desktop\\ProiectIS\\ProiectIS\\ProjIS.csproj",
+      "packagesPath": "C:\\Users\\sindr\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\sindr\\OneDrive\\Desktop\\ProiectIS\\ProiectIS\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/potens/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\sindr\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
@@ -3345,7 +3345,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.201/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.AspNetCore": "(,10.0.32767]",
           "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",

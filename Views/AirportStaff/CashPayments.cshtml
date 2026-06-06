@@ -1,0 +1,143 @@
+@using ProjIS.Models
+@model List<Reservation>
+
+@{
+    ViewData["Title"] = "Cash Payments";
+}
+
+<section style="padding: var(--space-12) 0;">
+    <div class="container">
+
+        <div style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-8);
+        ">
+            <div>
+                <p style="
+                    color: var(--color-accent);
+                    font-size: var(--text-sm);
+                    font-weight: var(--font-bold);
+                    letter-spacing: 2px;
+                    margin-bottom: var(--space-2);
+                ">
+                    AIRPORT STAFF
+                </p>
+
+                <h1>Cash payments</h1>
+
+                <p style="color: var(--color-text-secondary); margin-top: var(--space-2);">
+                    Validate pending cash payments.
+                </p>
+            </div>
+
+            <a class="btn btn-outline" href="/airport-staff/dashboard">
+                Back to dashboard
+            </a>
+        </div>
+
+        @if (TempData["Success"] != null)
+        {
+            <div class="card" style="background: var(--color-success-bg); color: var(--color-success); margin-bottom: var(--space-6);">
+                @TempData["Success"]
+            </div>
+        }
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="card" style="background: var(--color-error-bg); color: var(--color-error); margin-bottom: var(--space-6);">
+                @TempData["Error"]
+            </div>
+        }
+
+        @if (!Model.Any())
+        {
+            <div class="card">
+                <span class="badge badge-success">All clear</span>
+
+                <h2 style="margin-top: var(--space-4); margin-bottom: var(--space-3);">
+                    No pending cash payments
+                </h2>
+
+                <p style="color: var(--color-text-secondary);">
+                    There are no cash reservations waiting for validation.
+                </p>
+            </div>
+        }
+        else
+        {
+            <div style="display: grid; gap: var(--space-6);">
+                @foreach (var reservation in Model)
+                {
+                    <div class="card">
+                        <div style="
+                            display: flex;
+                            justify-content: space-between;
+                            gap: var(--space-6);
+                            align-items: flex-start;
+                        ">
+                            <div>
+                                <span class="badge badge-warning">Pending cash</span>
+
+                                <h2 style="margin-top: var(--space-3); margin-bottom: var(--space-3);">
+                                    Reservation #@reservation.Id
+                                </h2>
+
+                                <p>
+                                    <strong>Passenger:</strong>
+                                    @reservation.PassengerName
+                                </p>
+
+                                <p>
+                                    <strong>Phone:</strong>
+                                    @reservation.Phone
+                                </p>
+
+                                <p>
+                                    <strong>Flight:</strong>
+                                    @reservation.OutboundFlight?.DepartureCity - @reservation.OutboundFlight?.DestinationCity
+                                </p>
+
+                                <p>
+                                    <strong>Date:</strong>
+                                    @reservation.OutboundDate
+                                </p>
+
+                                <p>
+                                    <strong>Class:</strong>
+                                    @reservation.OutboundClass
+                                </p>
+                            </div>
+
+                            <div style="text-align: right;">
+                                <p style="
+                                    font-size: var(--text-3xl);
+                                    font-weight: var(--font-bold);
+                                    color: var(--color-accent);
+                                    margin-bottom: var(--space-4);
+                                ">
+                                    @reservation.TotalPrice lei
+                                </p>
+
+                                <p style="margin-bottom: var(--space-4);">
+                                    <strong>Status:</strong>
+                                    @reservation.PaymentStatus
+                                </p>
+
+                                <form action="/airport-staff/validate-payment" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="reservationId" value="@reservation.Id" />
+
+                                    <button type="submit" class="btn btn-primary">
+                                        Validate payment
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</section>

@@ -1,0 +1,109 @@
+@using ProjIS.Models
+@model List<Reservation>
+
+@{
+    ViewData["Title"] = "Validated Payments";
+}
+
+<section style="padding: var(--space-12) 0;">
+    <div class="container">
+
+        <div style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-8);
+        ">
+            <div>
+                <p style="
+                    color: var(--color-accent);
+                    font-size: var(--text-sm);
+                    font-weight: var(--font-bold);
+                    letter-spacing: 2px;
+                    margin-bottom: var(--space-2);
+                ">
+                    AIRPORT STAFF
+                </p>
+
+                <h1>Validated payments</h1>
+
+                <p style="color: var(--color-text-secondary); margin-top: var(--space-2);">
+                    Cash reservations that were already confirmed.
+                </p>
+            </div>
+
+            <a class="btn btn-outline" href="/airport-staff/dashboard">
+                Back to dashboard
+            </a>
+        </div>
+
+        @if (!Model.Any())
+        {
+            <div class="card">
+                <h2>No validated payments yet</h2>
+                <p style="color: var(--color-text-secondary); margin-top: var(--space-2);">
+                    Validated cash payments will appear here.
+                </p>
+            </div>
+        }
+        else
+        {
+            <div style="display: grid; gap: var(--space-6);">
+                @foreach (var reservation in Model)
+                {
+                    <div class="card">
+                        <div style="
+                            display: flex;
+                            justify-content: space-between;
+                            gap: var(--space-6);
+                            align-items: flex-start;
+                        ">
+                            <div>
+                                <span class="badge badge-success">Paid</span>
+
+                                <h2 style="margin-top: var(--space-3); margin-bottom: var(--space-3);">
+                                    Reservation #@reservation.Id
+                                </h2>
+
+                                <p>
+                                    <strong>Passenger:</strong>
+                                    @reservation.PassengerName
+                                </p>
+
+                                <p>
+                                    <strong>Flight:</strong>
+                                    @reservation.OutboundFlight?.DepartureCity - @reservation.OutboundFlight?.DestinationCity
+                                </p>
+
+                                <p>
+                                    <strong>Date:</strong>
+                                    @reservation.OutboundDate
+                                </p>
+
+                                <p>
+                                    <strong>Validated by:</strong>
+                                    @(reservation.ValidatedByStaffNavigation?.FullName ?? "Airport staff")
+                                </p>
+
+                                <p>
+                                    <strong>Validated at:</strong>
+                                    @(reservation.ValidatedAt?.ToString("dd/MM/yyyy HH:mm") ?? "-")
+                                </p>
+                            </div>
+
+                            <div style="text-align: right;">
+                                <p style="
+                                    font-size: var(--text-3xl);
+                                    font-weight: var(--font-bold);
+                                    color: var(--color-accent);
+                                ">
+                                    @reservation.TotalPrice lei
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</section>

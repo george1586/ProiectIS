@@ -1,0 +1,150 @@
+@using ProjIS.Models
+@using ProjIS.Models.ViewModels
+@model List<Flight>
+
+@{
+    ViewData["Title"] = "Flight Results";
+    var search = ViewBag.Search as FlightSearchViewModel;
+    var returnFlights = ViewBag.ReturnFlights as List<Flight> ?? new List<Flight>();
+}
+
+<section style="padding: var(--space-12) 0;">
+    <div class="container">
+
+        <h1 style="margin-bottom: var(--space-4);">
+            Available flights
+        </h1>
+
+        @if (search != null)
+        {
+            <div class="card" style="margin-bottom: var(--space-6);">
+                <p>
+                    Search:
+                    <strong>@search.DepartureCity</strong>
+                    to
+                    <strong>@search.DestinationCity</strong>,
+                    date:
+                    <strong>@search.DepartureDate</strong>,
+                    passengers:
+                    <strong>@search.Passengers</strong>
+                </p>
+            </div>
+        }
+
+        @if (!Model.Any())
+        {
+            <div class="card" style="background: var(--color-error-bg); color: var(--color-error); margin-bottom: var(--space-6);">
+                <strong>No outbound flights found.</strong>
+                <p style="margin-top: var(--space-2);">
+                    Try another date or check if the airline created this route.
+                </p>
+            </div>
+
+            <a class="btn btn-primary" asp-controller="Home" asp-action="Index">
+                Back to search
+            </a>
+        }
+        else
+        {
+            <div style="display: grid; gap: var(--space-6);">
+                @foreach (var flight in Model)
+                {
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; gap: var(--space-6); align-items: flex-start;">
+                            <div>
+                                <h2 style="margin-bottom: var(--space-3);">
+                                    @flight.DepartureCity - @flight.DestinationCity
+                                </h2>
+
+                                <p>
+                                    <strong>Airline:</strong>
+                                    @(flight.Airline?.Name ?? "Unknown")
+                                </p>
+
+                                <p>
+                                    <strong>Route code:</strong>
+                                    @flight.RouteCode
+                                </p>
+
+                                <p>
+                                    <strong>Plane:</strong>
+                                    @flight.PlaneModel
+                                </p>
+
+                                <p>
+                                    <strong>Departure time:</strong>
+                                    @flight.DepartureTime
+                                </p>
+                            </div>
+
+                            <div>
+                                <p>
+                                    <span class="class-economy">Economy:</span>
+                                    @flight.EconomyPrice lei
+                                </p>
+
+                                <p>
+                                    <span class="class-business">Business:</span>
+                                    @flight.BusinessPrice lei
+                                </p>
+
+                                <p>
+                                    <span class="class-first">First class:</span>
+                                    @flight.FirstClassPrice lei
+                                </p>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: var(--space-6);">
+                            @if (search != null && search.IsRoundTrip)
+                            {
+                                if (!returnFlights.Any())
+                                {
+                                    <p style="color: var(--color-error);">
+                                        No return flights found for the selected date.
+                                    </p>
+                                }
+                                else
+                                {
+                                    <p style="margin-bottom: var(--space-3);">
+                                        Select a return flight:
+                                    </p>
+
+                                    @foreach (var returnFlight in returnFlights)
+                                    {
+                                        <a class="btn btn-primary"
+                                           style="margin-right: var(--space-3); margin-bottom: var(--space-3);"
+                                           asp-controller="Passenger"
+                                           asp-action="Book"
+                                           asp-route-outboundFlightId="@flight.Id"
+                                           asp-route-outboundDate="@search.DepartureDate"
+                                           asp-route-returnFlightId="@returnFlight.Id"
+                                           asp-route-returnDate="@search.ReturnDate">
+                                            Book with return @returnFlight.RouteCode
+                                        </a>
+                                    }
+                                }
+                            }
+                            else if (search != null)
+                            {
+                                <a class="btn btn-primary"
+                                   asp-controller="Passenger"
+                                   asp-action="Book"
+                                   asp-route-outboundFlightId="@flight.Id"
+                                   asp-route-outboundDate="@search.DepartureDate">
+                                    Book this flight
+                                </a>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div style="margin-top: var(--space-8);">
+                <a class="btn btn-outline" asp-controller="Home" asp-action="Index">
+                    Back to search
+                </a>
+            </div>
+        }
+    </div>
+</section>

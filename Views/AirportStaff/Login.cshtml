@@ -1,0 +1,156 @@
+@model ProjIS.Models.ViewModels.AirportStaffLoginViewModel
+
+@{
+    ViewData["Title"] = "Airport Staff Login";
+}
+
+<section class="auth-section">
+    <div class="auth-card">
+
+        <div class="auth-card__header">
+            <div class="auth-card__icon">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 20L14 4L24 20H16L14 24L12 20H4Z" fill="#F5A623"/>
+                </svg>
+            </div>
+
+            <h1 class="auth-card__title">Airport Staff</h1>
+            <p class="auth-card__subtitle">Sign in to validate cash payments</p>
+        </div>
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert--error">
+                @Html.ValidationSummary(false, "", new { @class = "validation-summary" })
+            </div>
+        }
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert--error">
+                @TempData["Error"]
+            </div>
+        }
+
+        <form asp-controller="AirportStaff" asp-action="Login" method="post" class="auth-form">
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <label class="form-label" asp-for="PersonalCode">Personal code</label>
+                <input asp-for="PersonalCode"
+                       class="input"
+                       type="password"
+                       placeholder="Enter staff code" />
+                <span asp-validation-for="PersonalCode" class="field-error"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn--full">
+                Sign in
+            </button>
+        </form>
+
+        <p class="auth-card__back">
+            <a href="/">← Back to flight search</a>
+        </p>
+    </div>
+</section>
+
+<style>
+    .auth-section {
+        min-height: calc(100vh - var(--nav-height) - 60px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--space-12) var(--space-4);
+    }
+
+    .auth-card {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-xl);
+        padding: var(--space-10);
+        width: 100%;
+        max-width: 420px;
+        box-shadow: var(--shadow-lg);
+    }
+
+    .auth-card__header {
+        text-align: center;
+        margin-bottom: var(--space-8);
+    }
+
+    .auth-card__icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 56px;
+        height: 56px;
+        background: var(--color-primary);
+        border-radius: var(--radius-lg);
+        margin-bottom: var(--space-4);
+    }
+
+    .auth-card__title {
+        font-family: var(--font-display);
+        font-size: var(--text-2xl);
+        color: var(--color-primary);
+        margin-bottom: var(--space-2);
+    }
+
+    .auth-card__subtitle {
+        font-size: var(--text-sm);
+        color: var(--color-text-secondary);
+    }
+
+    .auth-form {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-5);
+    }
+
+    .auth-form .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+    }
+
+    .btn--full {
+        width: 100%;
+        padding: var(--space-4);
+        font-size: var(--text-base);
+        margin-top: var(--space-2);
+    }
+
+    .alert {
+        padding: var(--space-3) var(--space-4);
+        border-radius: var(--radius-md);
+        font-size: var(--text-sm);
+        margin-bottom: var(--space-5);
+    }
+
+    .alert--error {
+        background: var(--color-error-bg);
+        color: var(--color-error);
+        border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+
+    .field-error {
+        font-size: var(--text-xs);
+        color: var(--color-error);
+        margin-top: var(--space-1);
+    }
+
+    .auth-card__back {
+        text-align: center;
+        margin-top: var(--space-6);
+        font-size: var(--text-sm);
+    }
+
+    .auth-card__back a {
+        color: var(--color-text-secondary);
+    }
+
+    .auth-card__back a:hover {
+        color: var(--color-primary);
+    }
+</style>

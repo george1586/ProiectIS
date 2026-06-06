@@ -1,0 +1,90 @@
+@{
+    ViewData["Title"] = "Airport Staff Dashboard";
+}
+
+<section style="padding: var(--space-12) 0;">
+    <div class="container">
+
+        <div style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-8);
+        ">
+            <div>
+                <p style="
+                    color: var(--color-accent);
+                    font-size: var(--text-sm);
+                    font-weight: var(--font-bold);
+                    letter-spacing: 2px;
+                    margin-bottom: var(--space-2);
+                ">
+                    AIRPORT STAFF
+                </p>
+
+                <h1>Dashboard</h1>
+
+                <p style="color: var(--color-text-secondary); margin-top: var(--space-2);">
+                    Welcome, @ViewBag.StaffName
+                </p>
+            </div>
+
+            <form action="/airport-staff/logout" method="post">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-outline">Logout</button>
+            </form>
+        </div>
+
+        @if (TempData["Success"] != null)
+        {
+            <div class="card" style="background: var(--color-success-bg); color: var(--color-success); margin-bottom: var(--space-6);">
+                @TempData["Success"]
+            </div>
+        }
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="card" style="background: var(--color-error-bg); color: var(--color-error); margin-bottom: var(--space-6);">
+                @TempData["Error"]
+            </div>
+        }
+
+        <div style="
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-6);
+        ">
+            <div class="card">
+                <span class="badge badge-warning">Cash pending</span>
+
+                <h2 style="margin-top: var(--space-4); margin-bottom: var(--space-3);">
+                    @ViewBag.PendingCashCount reservations
+                </h2>
+
+                <p style="color: var(--color-text-secondary); margin-bottom: var(--space-6);">
+                    Reservations paid in cash must be manually validated by airport staff.
+                </p>
+
+                <a class="btn btn-primary" href="/airport-staff/cash-payments">
+                    View cash payments
+                </a>
+            </div>
+
+            <div class="card">
+                <span class="badge badge-success">Validated</span>
+
+                <h2 style="margin-top: var(--space-4); margin-bottom: var(--space-3);">
+                    @ViewBag.ValidatedCashCount reservations
+                </h2>
+
+                <p style="color: var(--color-text-secondary); margin-bottom: var(--space-6);">
+                    These cash payments were already checked and confirmed.
+                </p>
+
+                <a class="btn btn-outline" href="/airport-staff/validated-payments">
+                    View validated payments
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
