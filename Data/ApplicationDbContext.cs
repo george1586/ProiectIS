@@ -56,7 +56,9 @@ public class ApplicationDbContext : DbContext
             e.Property(x => x.BusinessPrice).HasColumnName("business_price");
             e.Property(x => x.FirstClassPrice).HasColumnName("first_class_price");
 
-            e.Property(x => x.FlightType).HasColumnName("flight_type");
+            e.Property(x => x.FlightType)
+    .HasColumnName("flight_type")
+    .HasColumnType("flight_type");
             e.Property(x => x.DepartureTime).HasColumnName("departure_time");
             e.Property(x => x.DaysOfWeek).HasColumnName("days_of_week");
             e.Property(x => x.SeasonStart).HasColumnName("season_start");
@@ -93,18 +95,28 @@ public class ApplicationDbContext : DbContext
 
             e.Property(x => x.OutboundFlightId).HasColumnName("outbound_flight_id");
             e.Property(x => x.OutboundDate).HasColumnName("outbound_date");
-            e.Property(x => x.OutboundClass).HasColumnName("outbound_class");
+            e.Property(x => x.OutboundClass)
+     .HasColumnName("outbound_class")
+     .HasColumnType("flight_class");
 
             e.Property(x => x.ReturnFlightId).HasColumnName("return_flight_id");
             e.Property(x => x.ReturnDate).HasColumnName("return_date");
-            e.Property(x => x.ReturnClass).HasColumnName("return_class");
+
+            e.Property(x => x.ReturnClass)
+                .HasColumnName("return_class")
+                .HasColumnType("flight_class");
 
             e.Property(x => x.HasMeal).HasColumnName("has_meal");
             e.Property(x => x.HasExtraLuggage).HasColumnName("has_extra_luggage");
 
             e.Property(x => x.TotalPrice).HasColumnName("total_price");
-            e.Property(x => x.PaymentMethod).HasColumnName("payment_method");
-            e.Property(x => x.PaymentStatus).HasColumnName("payment_status");
+            e.Property(x => x.PaymentMethod)
+    .HasColumnName("payment_method")
+    .HasColumnType("payment_method");
+
+            e.Property(x => x.PaymentStatus)
+    .HasColumnName("payment_status")
+    .HasColumnType("payment_status");
             e.Property(x => x.ValidatedByStaff).HasColumnName("validated_by_staff");
             e.Property(x => x.ValidatedAt).HasColumnName("validated_at");
 

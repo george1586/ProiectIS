@@ -34,6 +34,14 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXV0aC9BaXJsaW5lTG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/potens/ProjIS/Views/Flight/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRmxpZ2h0L0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/potens/ProjIS/Views/Flight/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRmxpZ2h0L0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/potens/ProjIS/Views/Home/index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9pbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
